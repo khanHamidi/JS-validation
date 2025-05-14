@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: rgb(227, 226, 224);
+        }
+        .container{
+            border: 1px solid gray;
+            width: 500px;
+            margin: 100px auto;
+            border-radius: 8px;
+            background-color: rgb(255, 255, 255);
+
+        }
+
+        @media screen and (max-width:700px) {
+            .container{
+               display: grid;
+               grid-template-columns: 1fr ;
+            }
+        }
+        .container h2{
+            background-color: rgb(0, 175, 102);
+            color: white;
+            margin: 0;
+            padding: 5px;
+            text-align: center;
+        }
+        .container .item{
+            width: 100%;
+            padding: 10px 25px;
+            margin: 0;
+        }
+        .container .item input{
+            width: calc(100% - 50px);
+            height: 30px;
+            border-radius: 2px;
+            border: 1px solid gray;
+        }
+
+        .container .item #submit{
+            background-color: rgb(0, 175, 102);;
+            color: white;
+            width: calc(100% - 45px);
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    
+
+
+    <div class="container">
+
+        <h2>Form vaildation</h2>
+        <form action="" method="post" id="form">
+
+            <div class="item">
+                <label for="">Name:</label><br>
+                <input type="text" placeholder="enter your name" id="user_name">
+              <br>  <small id="name_error"></small>
+            </div>
+            <div class="item">
+                <label for="">Email:</label><br>
+                <input type="text" placeholder="enter your email" id="user_email">
+            <br>  <small id="email_error"></small>
+            </div>
+            <div class="item">
+                <label for="">Password:</label><br>
+                <input type="password" placeholder="enter your password" id="user_password">
+               <br>  <small id="password_error"></small>
+
+            </div>
+         
+            <div class="item">
+                
+                <input type="submit" placeholder="enter your" id="submit" onclick=" return vaildation()">
+
+            </div>
+        </form>
+    </div>
+
+
+    <script>
+
+        const form = document.getElementById('form');
+
+
+        form.addEventListener('submit' , e=>{
+            e.preventDefault();
+        })
+    const vaildation =()=>{
+
+        const user_name = document.getElementById('user_name').value;
+        const user_email = document.getElementById('user_email').value;
+        const user_password = document.getElementById('user_password').value;
+
+        if(user_name == ''){
+
+        document.getElementById('name_error').textContent='User name is required';
+        document.getElementById('name_error').style.color='red';
+        document.getElementById('user_name').style.border='2px solid red';
+        return false
+
+        }
+     
+        if(!isNaN(user_name)){
+
+        document.getElementById('name_error').textContent='User name is not be the number ';
+        document.getElementById('name_error').style.color='red';
+        document.getElementById('user_name').style.border='2px solid red';
+        return false;
+        }
+
+        else if (user_name.length <=5 || user_name.length >=15){
+        document.getElementById('name_error').textContent='User name is not be greater than 15 char and less than 5 char  ';
+        document.getElementById('name_error').style.color='red';
+        document.getElementById('user_name').style.border='2px solid red';
+        return false;
+        }
+
+        else{
+        document.getElementById('name_error').textContent='';
+        document.getElementById('name_error').style.color='red';
+        document.getElementById('user_name').style.border='2px solid green';
+        
+        }
+        
+        const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,}$/i;
+           
+        if (user_email == ''){
+            document.getElementById('email_error').textContent='User email is required';
+            document.getElementById('email_error').style.color='red';
+            document.getElementById('user_email').style.border='2px solid red';
+            return false;
+        }
+
+        else if (!emailPattern.test(user_email)){
+            document.getElementById('email_error').textContent='Invalid email format pleace enter the correct email address';
+            document.getElementById('email_error').style.color='red';
+            document.getElementById('user_email').style.border='2px solid red';
+            return false;
+        }
+        else{
+        document.getElementById('email_error').textContent='';
+        document.getElementById('email_error').style.color='red';
+        document.getElementById('user_email').style.border='2px solid green';
+        
+        }
+
+
+        if (user_password ==""){
+            document.getElementById('password_error').textContent='User Password is required';
+            document.getElementById('password_error').style.color='red';
+            document.getElementById('user_password').style.border='2px solid red';
+            return false;
+        }
+
+        else if (user_password.length <=8 ){
+            document.getElementById('password_error').textContent='User Password is not less than 8 char ';
+            document.getElementById('password_error').style.color='red';
+            document.getElementById('user_password').style.border='2px solid red';
+            return false;
+        }
+
+        else{
+            document.getElementById('password_error').textContent='';
+            document.getElementById('password_error').style.color='red';
+            document.getElementById('user_password').style.border='2px solid green';
+        
+        }
+
+
+
+
+
+
+    }
+
+        
+
+      
+
+    </script>
+</body>
+</html>
